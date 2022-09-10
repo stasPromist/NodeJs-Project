@@ -67,6 +67,5 @@ function validateUser(user) {
   exports.validate = validateUser;
   exports.validateCards = validateCards;
 
-// module.exports = User;
 
 

@@ -2,11 +2,6 @@ const express = require('express');
 const router = express.Router();
 const userSchema = require('../validations/user');
 const { User } = require('../models/user');
-// import chalk from 'chalk';
-// const error =chalk.bold.red;
-// const warning = chalk.hex('#FFA500');
-// console.log(error('ERROR!'));
-// console.log(warning('WARNING!'));
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const _ = require("lodash");
@@ -108,11 +103,7 @@ function saveUser(user){
 
 
     router.post("/checkToken" ,(req, res) => {
-        // const myPassword = "Ma8hgjtSnozz";
-        // const example = {email: "example@example.com", lastLogIn:Date.now()};
         const example = {email: "example@example.com"};
-
-        // var jwt = require('jsonwebtoken');
         try {
            
                 var token = jwt.sign({exp: Math.floor(Date.now() / 1000) ,data:example},  myPassword);
@@ -128,11 +119,7 @@ function saveUser(user){
 
 
 
-   
     router.post("/depcryptToken" ,(req, res) => {
-        // const example = {email: "example@example.com", lastLogIn:Date.now()};
-        // const example = {email: "example@example.com"};
-
         try {
             var decoded = jwt.verify(req.body.token,myPassword)
             res.status(200).send(decoded);

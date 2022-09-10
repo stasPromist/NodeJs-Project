@@ -2,7 +2,6 @@ const express = require('express');
 const _ = require('lodash');
 const { Card, validateCard, generateBizNumber } = require('../models/card');
 const auth = require('../middleware/checkToken');
-// const morgan = require('morgan');
 const router = express.Router();
 
 //Delete card by ID(card)
@@ -29,11 +28,9 @@ router.put('/:id', auth, async (req, res) => {
   
    let card = await Card.findOneAndUpdate( filter, req.body);
 
-  // let card = await Card.findOneAndUpdate({ _id: req.params.id, user_id: req.user._id }, req.body);
   if (!card) return res.status(404).send('The card with the given ID was not found.');
   card = await Card.findOne(filter);
 
-  // card = await Card.findOne({ _id: req.params.id, user_id: req.user._id });
   res.send(card);
 } else {
   res.status(400).send("Must be a Biz");
@@ -50,14 +47,7 @@ router.get('/',  async (req, res) => {
 });
 
 
-//To get one card by ID(card) (8)
-// router.get('/:id',  async (req, res) => {
 
-//   const card = await Card.findOne({ _id: req.params.id });
-//   if (!card) return res.status(404).send('The card with the given ID was not found.');
-//   res.send(card);
-
-// });
 
 //To get cards by ID(card) with token
 router.get('/:id', auth, async (req, res) => {
@@ -69,7 +59,6 @@ router.get('/:id', auth, async (req, res) => {
   res.status(500).send();
 }
 });
-//To get all cards of all users without token
 
 //To create new card with Token, if user is Biz
 router.post('/',auth, async (req, res) => {
